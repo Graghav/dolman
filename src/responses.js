@@ -103,6 +103,26 @@ module.exports = function(app, logger, types) {
 
     return this.status(400).json(data);
   };
+  
+  
+  /**
+   * Conflict.
+   */
+   response.conflict = function(reason) {
+     var data = {
+       status: 'error',
+       code: 409,
+       error: {
+         message: 'Conflict'
+       }
+     };
+
+     if (reason)
+       data.error.reason = reason;
+
+     this.status(409).json(data);
+   };
+
 
   /**
    * Unauthorized.
